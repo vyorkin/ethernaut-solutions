@@ -26,7 +26,8 @@ contract Instance {
             keccak256(abi.encodePacked("hello"))
         ) {
             return
-                "The property infoNum holds the number of the next info method to call.";
+                "The property infoNum holds the "
+                "number of the next info method to call.";
         }
         return "Wrong parameter.";
     }
