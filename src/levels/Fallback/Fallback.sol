@@ -9,7 +9,7 @@ contract Fallback {
     address payable public owner;
 
     constructor() {
-        owner = payable(msg.sender); // Type issues must be payable address
+        owner = payable(msg.sender);
         contributions[msg.sender] = 1000 * (1 ether);
     }
 
@@ -19,10 +19,10 @@ contract Fallback {
     }
 
     function contribute() public payable {
-        require(msg.value < 0.001 ether, "msg.value must be < 0.001"); // Add message with require
+        require(msg.value < 0.001 ether, "msg.value must be < 0.001");
         contributions[msg.sender] += msg.value;
         if (contributions[msg.sender] > contributions[owner]) {
-            owner = payable(msg.sender); // Type issues must be payable address
+            owner = payable(msg.sender);
         }
     }
 
@@ -34,12 +34,8 @@ contract Fallback {
         owner.transfer(address(this).balance);
     }
 
-    fallback() external payable {
-        // naming has switched to fallback
-        require(
-            msg.value > 0 && contributions[msg.sender] > 0,
-            "tx must have value and msg.send must have made a contribution"
-        ); // Add message with require
-        owner = payable(msg.sender); // Type issues must be payable address
+    receive() external payable {
+        require(msg.value > 0 && contributions[msg.sender] > 0);
+        owner = payable(msg.sender);
     }
 }

