@@ -66,7 +66,7 @@ contract Ethernaut is Ownable {
         // Instance was emitted for this player.
         require(data.player == msg.sender);
         // Not already submitted.
-        require(data.completed == false);
+        require(!data.completed);
 
         // Have the level check the instance.
         if (data.level.validateInstance(_instance, msg.sender)) {

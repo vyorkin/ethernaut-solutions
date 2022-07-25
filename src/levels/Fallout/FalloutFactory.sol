@@ -2,11 +2,11 @@
 pragma solidity ^0.8.2;
 
 import "../../game/LevelFactory.sol";
-import "./Fallback.sol";
+import "./Fallout.sol";
 
-contract FallbackFactory is LevelFactory {
+contract FalloutFactory is LevelFactory {
     function createInstance(address) public payable override returns (address) {
-        Fallback instance = new Fallback();
+        Fallout instance = new Fallout();
         return address(instance);
     }
 
@@ -16,7 +16,7 @@ contract FallbackFactory is LevelFactory {
         override
         returns (bool)
     {
-        Fallback instance = Fallback(_instance);
-        return instance.owner() == _player && address(instance).balance == 0;
+        Fallout instance = Fallout(_instance);
+        return instance.owner() == _player;
     }
 }
