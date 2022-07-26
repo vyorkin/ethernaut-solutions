@@ -2,7 +2,7 @@
 pragma solidity ^0.8.2;
 
 import {Ethernaut} from "../game/Ethernaut.sol";
-import {CoinFlip} from "../levels/CoinFLip/CoinFlip.sol";
+import {CoinFlip} from "../levels/CoinFlip/CoinFlip.sol";
 import {CoinFlipFactory} from "../levels/CoinFlip/CoinFlipFactory.sol";
 import {LevelTest} from "./common/LevelTest.sol";
 
