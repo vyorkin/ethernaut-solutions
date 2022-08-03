@@ -46,7 +46,7 @@ contract KingExploit1 {
 }
 
 contract KingExploit2 {
-    address payable level;
+    address payable private immutable level;
 
     constructor(King _king) {
         level = payable(address(_king));
